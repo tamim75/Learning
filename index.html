@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<!--
+  ─────────────────────────────────────────────────────────────
+  THE LANGUAGE OF DESIGN — a daily study tool
+  70 terms · 17 days · Block 1, Design Fundamentals
+
+  One file. No build step, no dependencies, no server.
+  Works offline once loaded, except the two web fonts.
+
+  ── PUT IT ON GITHUB PAGES ──
+  1. github.com/new → name it (e.g. design-vocab) → Public → Create
+  2. "uploading an existing file" → drag this file in → Commit
+     The filename must stay exactly: index.html
+  3. Settings → Pages → Source: "Deploy from a branch"
+     Branch: main · Folder: / (root) → Save
+  4. Wait about a minute, then open:
+     https://YOUR-USERNAME.github.io/REPO-NAME/
+
+  ── NOTES ──
+  · Progress lives in this browser only. It does not sync between
+    your phone and your laptop, and clearing site data wipes it.
+  · To add or edit terms, find "const DAYS" further down and copy
+    the shape of any existing entry:
+      n = name · d = definition · h = history
+      p = in practice · s = say it in a review · k = search keywords
+  · Blocks 2 to 7 are listed as a roadmap and have no terms yet.
+  ─────────────────────────────────────────────────────────────
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The language of design — daily study</title>
+<meta name="description" content="A daily design vocabulary tool. Five terms a day with origins, practice notes and a sentence you can use in a review.">
+<meta name="theme-color" content="#131417">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="The language of design">
+<meta property="og:description" content="Five design terms a day, with where each one came from.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131417'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' fill='%238C9CFF' text-anchor='middle'%3Ed%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Open+Sans:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#131417;
+  --paper-2:#1B1D21;
+  --ink:#EDEDE8;
+  --ink-soft:#9EA4AB;
+  --ink-faint:#6E747B;
+  --rule:#2C2F34;
+  --accent:#8C9CFF;
+  --accent-soft:#20253F;
+  --sand:#1E1D1A;
+  --read:#D4D6D1;
+  --read-soft:#B8BBB6;
+  --ok:#6FBF95;
+
+  --step--1:0.8125rem;
+  --step-0:0.9375rem;
+  --step-1:1.125rem;
+  --step-2:1.5rem;
+  --step-3:2.25rem;
+  --step-4:3.5rem;
+
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
+  --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:72px;
+}
+html{color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  font-size:var(--step-0);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+::selection{background:var(--accent);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ── shell ─────────────────────────────── */
+.shell{display:grid;grid-template-columns:270px minmax(0,1fr);column-gap:100px;row-gap:0;max-width:1240px;margin:0 auto;padding:0 var(--sp-5)}
+@media (max-width:920px){.shell{grid-template-columns:1fr;column-gap:0}}
+
+/* ── masthead ──────────────────────────── */
+.masthead{grid-column:1/-1;padding:var(--sp-4) 0 var(--sp-3)}
+.masthead h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:var(--step-2);line-height:1;margin:0;letter-spacing:-0.015em}
+.masthead h1 em{font-style:italic}
+.mast-meta{display:flex;flex-wrap:wrap;gap:var(--sp-5);font-size:var(--step--1);color:var(--ink-soft)}
+.mast-meta b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+
+/* ── left rail ─────────────────────────── */
+.rail{padding:var(--sp-5) 0 var(--sp-6);align-self:start;position:sticky;top:var(--sp-4)}
+@media (max-width:920px){
+  .rail{position:static;border-bottom:1px solid var(--rule);padding-bottom:var(--sp-5);min-height:0}
+  .blockhead{display:none}
+  .blocktoggle{
+    display:flex;align-items:center;gap:var(--sp-3);width:100%;
+    background:var(--paper-2);border:1px solid var(--rule);border-radius:4px;
+    color:var(--ink);font:inherit;font-size:var(--step--1);padding:9px var(--sp-3);cursor:pointer;
+  }
+  .blocktoggle svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+  .blocktoggle em{margin-left:auto;font-style:normal;color:var(--ink-faint);font-size:0.75rem}
+  .blocktoggle[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+  .blockgroup .blocklist{display:none;margin-top:var(--sp-2)}
+  .blockgroup.open .blocklist{display:block}
+}
+.rail h2{font-size:0.75rem;font-weight:600;margin:0 0 var(--sp-3);color:var(--ink-faint)}
+.rail-group{margin-bottom:var(--sp-6)}
+
+.search{display:flex;align-items:center;gap:var(--sp-2);border:1px solid var(--rule);background:var(--paper-2);border-radius:4px;padding:0 var(--sp-3)}
+.search:focus-within{border-color:var(--accent)}
+.search input{flex:1;min-width:0;border:0;background:none;font:inherit;color:var(--ink);padding:10px 0}
+.search input:focus{outline:none}
+.search kbd{font-family:"IBM Plex Mono",monospace;font-size:0.7rem;color:var(--ink-faint);border:1px solid var(--rule);border-radius:3px;padding:1px 5px}
+.resultnote{font-size:var(--step--1);color:var(--ink-soft);margin-top:var(--sp-2);display:none}
+.resultnote.on{display:block}
+
+.barbtn{display:block;width:100%;background:none;border:0;padding:0;cursor:default}
+.bar{display:block;height:3px;background:var(--rule);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s ease}
+.progress-num{font-size:0.75rem;color:var(--ink-faint);margin-top:6px;font-variant-numeric:tabular-nums}
+
+.blocklist{list-style:none;margin:0;padding:0}
+.blocklist button{width:100%;text-align:left;background:none;border:0;cursor:pointer;font:inherit;font-size:var(--step--1);color:var(--ink-soft);padding:6px var(--sp-2);border-radius:3px;display:flex;justify-content:space-between;gap:var(--sp-2)}
+.blocklist button:hover{background:var(--paper-2);color:var(--ink)}
+.blocklist button[aria-current="true"]{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.blocklist .cnt{font-variant-numeric:tabular-nums;color:var(--ink-faint);font-size:0.75rem}
+
+.btn{font:inherit;font-size:var(--step--1);cursor:pointer;border:1px solid var(--rule);background:var(--paper-2);color:var(--ink);padding:9px var(--sp-4);border-radius:4px}
+.btn:hover{border-color:var(--ink-soft)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled:hover{border-color:var(--rule)}
+.btn.wide{width:100%;margin-top:var(--sp-2)}
+
+.rail{display:flex;flex-direction:column}
+.rail-foot{
+  grid-column:1;align-self:end;
+  padding:var(--sp-5) 0 var(--sp-6);
+  display:flex;align-items:center;gap:var(--sp-3);
+  font-size:var(--step--1);color:var(--ink-faint);
+}
+
+.rail-foot span{cursor:default}
+@media (max-width:920px){
+  .masthead{padding:var(--sp-3) 0 var(--sp-2)}
+  .masthead h1{font-size:var(--step-1)}
+  .rail{
+    display:grid;grid-template-columns:1fr auto;gap:var(--sp-2) var(--sp-2);
+    align-items:center;padding:var(--sp-3) 0 var(--sp-4);
+  }
+  .rail-group{margin-bottom:0}
+  .rail-group:nth-of-type(1){grid-column:1;grid-row:1}
+  .blockgroup{grid-column:2;grid-row:1}
+  .rail-group:nth-of-type(2){grid-column:1/-1;grid-row:2}
+  .blockgroup .blocklist{
+    position:absolute;right:var(--sp-5);z-index:15;margin-top:var(--sp-2);
+    background:var(--paper-2);border:1px solid var(--rule);border-radius:5px;
+    padding:var(--sp-2);min-width:190px;box-shadow:0 8px 20px rgba(0,0,0,.45);
+  }
+  .blocktoggle{padding:9px 11px}
+  .blocktoggle span,.blocktoggle em{display:none}
+  .search input{padding:9px 0}
+  .rail h2{display:none}
+  .barbtn{cursor:pointer;padding:4px 0}
+  .progmore{display:none}
+  .barbtn[aria-expanded="true"] + .progmore{display:block}
+  .rail{min-height:0}
+  .rail-foot{grid-column:1;padding:var(--sp-5) 0;border-top:1px solid var(--rule);margin-top:var(--sp-5)}
+}
+
+.gear{
+  background:none;border:1px solid var(--rule);border-radius:4px;cursor:pointer;
+  color:var(--ink-soft);width:30px;height:30px;display:grid;place-items:center;padding:0;
+}
+.gear:hover{border-color:var(--ink-soft);color:var(--ink)}
+.gear svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6}
+
+.scrim{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;
+  display:grid;place-items:center;padding:var(--sp-4);
+}
+.scrim[hidden]{display:none}
+.modal{
+  background:var(--paper);border:1px solid var(--rule);border-radius:6px;
+  width:min(420px,100%);max-height:85vh;overflow:auto;padding:var(--sp-5);
+}
+.modal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-4)}
+.modal-top h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:var(--step-2);margin:0}
+.x{background:none;border:0;color:var(--ink-faint);font-size:1.2rem;line-height:1;cursor:pointer;padding:4px 8px;border-radius:4px}
+.x:hover{color:var(--ink);background:var(--paper-2)}
+.bakebox p{font-size:0.75rem;color:var(--ink-faint);margin:0 0 var(--sp-2);line-height:1.5}
+.bakehint{margin:var(--sp-2) 0 0 !important}
+.modal hr{border:0;border-top:1px solid var(--rule);margin:var(--sp-4) 0}
+.settings label{display:flex;gap:var(--sp-3);align-items:flex-start;padding:8px 0;cursor:pointer;color:var(--ink-soft);font-size:var(--step--1)}
+.settings input[type=checkbox]{margin-top:3px;accent-color:var(--accent);flex:0 0 auto}
+.settings label:hover{color:var(--ink)}
+.goalrow{display:flex;gap:var(--sp-2);align-items:center;margin-top:var(--sp-3);font-size:var(--step--1);color:var(--ink-soft)}
+.goalrow input{width:56px;font:inherit;padding:4px 6px;border:1px solid var(--rule);border-radius:3px;background:var(--paper);color:var(--ink)}
+
+@media (min-width:921px){ .blocktoggle{display:none} }
+
+/* ── day strip ─────────────────────────── */
+.main{padding:var(--sp-5) 0 var(--sp-8);min-width:0}
+.strip{display:flex;gap:5px;overflow-x:auto;padding-bottom:var(--sp-3);margin-bottom:var(--sp-5);border-bottom:1px solid var(--rule);scrollbar-width:thin;scrollbar-color:var(--rule) transparent}
+.strip::-webkit-scrollbar{height:6px}
+.strip::-webkit-scrollbar-track{background:transparent}
+.strip::-webkit-scrollbar-thumb{background:var(--rule);border-radius:3px}
+.strip::-webkit-scrollbar-thumb:hover{background:var(--ink-faint)}
+.strip button{
+  flex:0 0 auto;width:34px;height:34px;border-radius:4px;cursor:pointer;
+  font:inherit;font-size:var(--step--1);font-variant-numeric:tabular-nums;
+  border:1px solid var(--rule);background:none;color:var(--ink-soft);
+}
+.strip button:hover:not(:disabled){border-color:var(--ink-soft);color:var(--ink)}
+.strip button.fin{background:var(--ok);border-color:var(--ok);color:#fff}
+.strip button.now{border-color:var(--accent);color:var(--accent);font-weight:600;box-shadow:inset 0 0 0 1px var(--accent)}
+.strip button.rev{border-style:dashed}
+.strip button:disabled{opacity:.35;cursor:not-allowed}
+.strip button[aria-current="true"]{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ── day panel ─────────────────────────── */
+.panel{background:var(--paper-2);border:1px solid var(--rule);border-radius:5px;padding:var(--sp-4);margin-bottom:var(--sp-5)}
+.panel-top{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);flex-wrap:wrap;margin-bottom:var(--sp-3)}
+.panel-k{font-size:0.75rem;color:var(--ink-faint);margin-bottom:1px}
+.panel-t{font-family:"Instrument Serif",Georgia,serif;font-size:var(--step-1);line-height:1.1;margin:0}
+.clock{display:flex;align-items:center;gap:var(--sp-3)}
+.clock-n{font-family:"IBM Plex Mono",monospace;font-size:var(--step-1);font-variant-numeric:tabular-nums;line-height:1}
+.clock small{font-size:0.75rem;color:var(--ink-faint);white-space:nowrap}
+.clock.rest .clock-n{color:var(--ok)}
+.clock.paused .clock-n{color:var(--ink-faint)}
+.clock .btn{padding:3px 9px;font-size:0.75rem}
+.dots{display:flex;gap:5px;margin-bottom:var(--sp-3)}
+.dots i{width:100%;height:4px;border-radius:2px;background:var(--rule)}
+.dots i.on{background:var(--ok)}
+.panel-foot{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3);flex-wrap:wrap}
+.panel-count{font-size:0.75rem;color:var(--ink-soft)}
+.panel-foot .btn{padding:6px var(--sp-3);font-size:0.75rem}
+.connect{color:var(--read-soft);font-size:0.9375rem;max-width:64ch;margin:0 0 var(--sp-4)}
+@media (max-width:520px){
+  .clock{width:100%;justify-content:space-between}
+  .panel-foot{align-items:flex-start;flex-direction:column;gap:var(--sp-2)}
+}
+
+/* ── term ──────────────────────────────── */
+.term{border-top:1px solid var(--rule)}
+.term:last-of-type{border-bottom:1px solid var(--rule)}
+.term-head{display:flex;gap:var(--sp-4);align-items:flex-start;padding:var(--sp-4) 0}
+.tick{appearance:none;-webkit-appearance:none;flex:0 0 auto;margin-top:5px;width:15px;height:15px;border:1px solid var(--ink-faint);border-radius:50%;cursor:pointer;background:none;position:relative}
+.tick:checked{background:var(--ok);border-color:var(--ok)}
+.tick:checked::after{content:"";position:absolute;left:4px;top:1px;width:4px;height:8px;border:solid #fff;border-width:0 1.5px 1.5px 0;transform:rotate(42deg)}
+.term-btn{flex:1;text-align:left;background:none;border:0;cursor:pointer;font:inherit;padding:0;color:var(--ink)}
+.term-name{font-family:"Instrument Serif",Georgia,serif;font-size:var(--step-1);line-height:1.2;display:block;margin-bottom:3px}
+.term.done .term-name{color:var(--ink-faint)}
+.term-def{color:var(--ink-soft);font-size:var(--step--1);display:block;max-width:70ch}
+.chev{flex:0 0 auto;color:var(--ink-faint);margin-top:6px;transition:transform .18s ease;font-size:0.7rem}
+.term.open .chev{transform:rotate(90deg)}
+.term-body{display:none;padding:0 0 var(--sp-5) calc(15px + var(--sp-4));max-width:72ch}
+.term.open .term-body{display:block}
+@media (max-width:640px){.term-body{padding-left:0}}
+.field{margin-bottom:var(--sp-5)}
+.field-k{font-size:0.75rem;color:var(--ink-faint);margin-bottom:5px}
+.read,.history,.term-body p,.sayit,.connect,.exercise,.review p,.review ol{
+  font-family:"Open Sans",-apple-system,"Segoe UI",sans-serif;
+  line-height:1.6;
+  color:var(--read);
+  letter-spacing:0.003em;
+}
+.history{font-size:0.9375rem;color:var(--read-soft);background:var(--sand);padding:var(--sp-4) var(--sp-5);border-radius:3px;margin:0;border-left:2px solid #3A362C}
+.term-body p{font-size:0.9375rem;margin:0}
+.term-def{line-height:1.6}
+.sayit{border-left:2px solid var(--accent);padding-left:var(--sp-4);font-style:italic;font-size:0.9375rem;margin:0}
+.keys{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.keys button{font:inherit;font-size:0.75rem;font-family:"IBM Plex Mono",monospace;background:var(--paper-2);border:1px solid var(--rule);color:var(--ink-soft);padding:3px 8px;border-radius:3px;cursor:pointer}
+.keys button:hover{border-color:var(--accent);color:var(--accent)}
+.exercise{margin-top:var(--sp-5);padding:var(--sp-5);background:var(--paper-2);border-radius:4px;font-size:0.9375rem}
+.exercise b{display:block;font-weight:600;margin-bottom:var(--sp-2)}
+.review{background:var(--accent-soft);border-radius:4px;padding:var(--sp-5)}
+.review p{margin:0 0 var(--sp-3);font-size:0.9375rem}
+.review ol{margin:0;padding-left:1.2em;font-size:0.9375rem;color:var(--read-soft)}
+
+/* ── search results ────────────────────── */
+.resultof{font-size:0.75rem;color:var(--ink-faint);margin:var(--sp-3) 0 0}
+.locked-msg,.empty{padding:var(--sp-7) 0;color:var(--ink-faint);text-align:center;font-size:var(--step--1)}
+.stubnote{font-size:var(--step--1);color:var(--ink-faint);border:1px dashed var(--rule);padding:var(--sp-4);border-radius:4px;margin-bottom:var(--sp-5)}
+.themelist{list-style:none;margin:0;padding:0;columns:2;column-gap:var(--sp-6)}
+@media (max-width:640px){.themelist{columns:1}}
+.themelist li{padding:8px 0;border-bottom:1px solid var(--rule);font-size:var(--step--1);break-inside:avoid;display:flex;gap:var(--sp-3)}
+.themelist span{color:var(--ink-faint);font-variant-numeric:tabular-nums;flex:0 0 3.5ch}
+footer{border-top:1px solid var(--ink);padding:var(--sp-5) 0 var(--sp-8);font-size:0.75rem;color:var(--ink-faint);grid-column:1/-1;max-width:1180px;margin:0 auto;width:100%}
+
+@media print{
+  .rail,.controls,.tick,.chev{display:none}
+  .term-body{display:block !important}
+  body{background:#fff;color:#000}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="masthead">
+    <h1>The language of <em>design</em></h1>
+  </header>
+
+  <nav class="rail">
+    <div class="rail-group">
+      <label class="search">
+        <input id="q" type="search" placeholder="Search everything unlocked" aria-label="Search terms">
+        <kbd>/</kbd>
+      </label>
+      <div class="resultnote" id="note"></div>
+    </div>
+
+    <div class="rail-group">
+      <h2>Progress</h2>
+      <button class="barbtn" id="barbtn" aria-expanded="false" aria-controls="progmore" aria-label="Show progress detail">
+        <span class="bar"><i id="bar-all"></i></span>
+      </button>
+      <div id="progmore" class="progmore">
+        <div class="progress-num" id="prog-all"></div>
+        <div class="progress-num" id="prog-sub"></div>
+        <button class="btn primary wide" id="jump">Open today's day</button>
+      </div>
+    </div>
+
+    <div class="rail-group blockgroup">
+      <button class="blocktoggle" id="blocktoggle" aria-expanded="false" aria-controls="blocks">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <span>Blocks</span>
+        <em id="blocknow">Fundamentals</em>
+      </button>
+      <h2 class="blockhead">Blocks</h2>
+      <ul class="blocklist" id="blocks"></ul>
+    </div>
+
+  </nav>
+
+  <main class="main">
+    <div class="strip" id="strip"></div>
+    <div id="view"></div>
+  </main>
+
+  <div class="rail-foot">
+      <button class="gear" id="opengear" aria-label="Settings" title="Settings">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
+        </button>
+      <span>Settings</span>
+    </div>
+
+  <footer>
+    Built as a personal study tool. Progress is saved in this browser only, so it will not follow you to another device.
+    Block 1 of 7 · 70 of about 350 terms written.
+  </footer>
+</div>
+
+<div class="scrim" id="scrim" hidden>
+  <div class="modal settings" role="dialog" aria-modal="true" aria-label="Settings">
+    <div class="modal-top">
+      <h2>Settings</h2>
+      <button class="x" id="closegear" aria-label="Close">&#10005;</button>
+    </div>
+    <label><input type="checkbox" id="opt-lock" checked> Lock days until the one before is finished</label>
+    <label><input type="checkbox" id="opt-timer" checked> Count time on this page</label>
+    <label><input type="checkbox" id="opt-auto" checked> Pause the clock when I switch away</label>
+    <label><input type="checkbox" id="opt-hist" checked> Show the history section</label>
+    <label><input type="checkbox" id="opt-open"> Open every term expanded</label>
+    <div class="goalrow"><span>Daily goal</span><input type="number" id="opt-goal" min="5" max="120" value="20"><span>min</span></div>
+    <hr>
+    <div class="bakebox">
+      <p id="bakeinfo"></p>
+      <button class="btn wide" id="bake">Save progress into a new index.html</button>
+      <p class="bakehint">Upload the downloaded file to GitHub, replacing the old one. Every browser then starts from this point.</p>
+    </div>
+    <hr>
+    <button class="btn wide" id="reset">Reset progress</button>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   TERMS
+   block · day · dayTitle · connect · exercise · then 5 terms
+   ════════════════════════════════════════════════════════════ */
+
+const DAYS = [
+{
+  block:"Fundamentals", day:1, title:"Perception",
+  connect:"Before you can arrange anything, you need words for how the eye reads it. These five are the substrate everything else sits on.",
+  exercise:"Open any app on your phone. Find one clear affordance, one broken signifier, and one place where Gestalt grouping is doing work that a border would otherwise do. Write one sentence on each.",
+  terms:[
+  {n:"Affordance",
+   d:"A property of a thing that signals how it can be used.",
+   h:"Coined by the psychologist James Gibson in 1979 to describe what an environment offers an animal — a flat surface affords walking. Don Norman imported it into design in The Design of Everyday Things (1988), then publicly corrected himself in 1999: designers cannot add affordances to a screen, because a screen affords touching and nothing else. What we actually control is the perceived affordance, which he renamed the signifier.",
+   p:"A raised surface with a shadow reads as pressable. A flat coloured label often does not.",
+   s:"The card has no affordance for tapping — nothing about it signals that it is interactive.",
+   k:["Gibson affordance theory","Don Norman affordance vs signifier","perceived affordance UI"]},
+  {n:"Signifier",
+   d:"The visible cue that tells a person where and how to act.",
+   h:"Norman borrowed the word from semiotics, where Ferdinand de Saussure used signifier and signified to separate a sign from its meaning. Norman narrowed it to the perceivable indicator of an action — the underline on a link, the handle on a drawer, the worn patch on a push plate. It solved the confusion his own use of affordance had caused a decade earlier.",
+   p:"Underlines, chevrons, cursor changes, and drop shadows are all signifiers. Removing them for visual cleanliness is the single most common cause of an unusable interface.",
+   s:"We can keep it visually quiet, but it needs a signifier — right now nothing tells you it opens.",
+   k:["signifier vs affordance design","Saussure signifier signified","UI interaction cues"]},
+  {n:"Gestalt principles",
+   d:"A set of rules describing how the eye automatically groups visual elements into wholes.",
+   h:"Developed by the German psychologists Max Wertheimer, Kurt Koffka and Wolfgang Kohler in the 1910s and 1920s. Gestalt means shape or unified whole. Their claim was that perception is not assembled from parts — the whole arrives first. The core principles are proximity, similarity, closure, continuity, common region, common fate and figure/ground. They predate digital screens by a century and remain the reason spacing works.",
+   p:"Proximity does more grouping work than any divider line. Reach for space before you reach for a border.",
+   s:"I removed the dividers — proximity already groups these rows, so the lines were only adding noise.",
+   k:["Gestalt principles of perception","proximity vs similarity design","Wertheimer 1923 laws of organization"]},
+  {n:"Figure and ground",
+   d:"The eye's separation of a subject from its background.",
+   h:"Named by the Danish psychologist Edgar Rubin in 1915, whose vase-or-faces illusion is the standard demonstration. It became a Gestalt principle and later a foundation of poster design and layered interfaces. Modals, sheets, overlays and drop shadows are all figure/ground devices — they tell you what is on top and therefore what is active.",
+   p:"Dimming the background behind a modal is not decoration. It is the mechanism that tells the eye which layer accepts input.",
+   s:"The overlay is too light. Figure and ground are ambiguous, so the page underneath still looks clickable.",
+   k:["Rubin vase figure ground","figure ground relationship UI layers","z-axis hierarchy interface"]},
+  {n:"Visual weight",
+   d:"How much attention an element pulls, relative to everything around it.",
+   h:"The idea comes from painting composition and was formalised for design by Rudolf Arnheim in Art and Visual Perception (1954), which treated a composition as a field of perceptual forces. Weight is produced by size, colour saturation, contrast against background, density, and isolation. Two elements can be the same pixel size and have completely different weight.",
+   p:"A small, saturated, isolated element can outweigh a large, pale, crowded one. Weight is not area.",
+   s:"The badge is 40 pixels wide but it is the heaviest thing on the screen. It is beating the title.",
+   k:["visual weight in composition","Arnheim art and visual perception","perceptual balance design"]}
+  ]
+},
+{
+  block:"Fundamentals", day:2, title:"Structure",
+  connect:"Grids are not a style. They are the shared coordinate system that lets a team, a codebase and a design file agree on where things go.",
+  exercise:"Take a screen you have designed. Overlay a 12-column grid. Count how many elements sit off-column. Do not fix them yet — just count.",
+  terms:[
+  {n:"Grid",
+   d:"An invisible framework of intersecting lines used to position and align content.",
+   h:"Grids come from movable type and page imposition, but the systematic modern grid was built by Swiss designers in the 1950s — Josef Muller-Brockmann's Grid Systems in Graphic Design (1961) is the canonical text. The web inherited the 12-column layout from print and from early CSS frameworks like 960.gs (2008) and Bootstrap (2011), chosen because 12 divides cleanly by 2, 3, 4 and 6.",
+   p:"A grid is a decision you make once so you do not remake it 200 times.",
+   s:"We are on a 12-column grid at desktop, 6 at tablet, 4 at mobile. Everything places against those.",
+   k:["Muller-Brockmann grid systems","12 column grid why","CSS grid layout fundamentals"]},
+  {n:"Column",
+   d:"A vertical division of the grid that content spans.",
+   h:"Column widths in print were driven by legibility of body text; in digital they are driven by component sizing. The shift matters — a web column rarely holds a paragraph, so its width is chosen for cards and controls rather than for reading. Responsive design (Ethan Marcotte, 2010) made column counts change per breakpoint rather than stay fixed.",
+   p:"Decide what a card is in columns, not in pixels. Then it survives every breakpoint.",
+   s:"The product card is 3 columns at desktop and 6 at tablet, so it never needs a hardcoded width.",
+   k:["responsive column spans","Ethan Marcotte responsive web design","fluid grid columns"]},
+  {n:"Gutter",
+   d:"The space between columns.",
+   h:"From bookbinding, where the gutter is the inner margin swallowed by the spine. In digital layout the gutter became a fixed token — commonly 16, 20 or 24 pixels — and its consistency is what makes a grid feel deliberate rather than accidental. A variable gutter reads immediately as sloppy even when nobody can name why.",
+   p:"Gutters usually stay constant while columns flex. Flexing both makes layouts unpredictable.",
+   s:"Gutter is fixed at 24. If we need tighter cards, we change the card padding, not the gutter.",
+   k:["grid gutter size standards","column gap vs gutter","layout spacing tokens"]},
+  {n:"Margin",
+   d:"The space between content and the outer edge of its container or screen.",
+   h:"In manuscript design, margins were enormous and mathematically derived — the Van de Graaf canon reconstructed the medieval proportions used in books like the Gutenberg Bible. Digital margins collapsed to almost nothing for a decade, then returned as mobile gained edge-to-edge screens and as premium brands used generous margins to signal value.",
+   p:"Screen margin is one of the strongest signals of perceived quality. Cramped edges read as cheap.",
+   s:"Pushing the screen margin from 16 to 24 on mobile costs us nothing functional and makes it feel considered.",
+   k:["Van de Graaf canon page margins","safe area insets mobile","screen edge padding standards"]},
+  {n:"Baseline grid",
+   d:"A horizontal rhythm of evenly spaced lines that text sits on.",
+   h:"A typesetting inheritance: in metal type, all text on a page shared a baseline so columns aligned across a spread. Print designers kept it; the web mostly abandoned it because line-height, font metrics and images made it painful. It survives in the 4 and 8 point spacing systems, which are baseline grids in disguise — Google formalised the 8dp grid in Material Design (2014).",
+   p:"You probably will not run a true baseline grid on the web. You should still run a 4 or 8 point spacing scale.",
+   s:"Everything spaces on multiples of 4. That 14 pixel gap is the only value in the file that breaks it.",
+   k:["8pt grid system design","baseline grid typography","vertical rhythm web"]}
+  ]
+},
+{
+  block:"Fundamentals", day:3, title:"Space",
+  connect:"Space is not what is left over. It is the primary tool for grouping, pacing and signalling value — and the one most often cut first.",
+  exercise:"Find a screen you think is too busy. Change nothing but spacing. No colour, no size, no deletions. See how far you get.",
+  terms:[
+  {n:"White space",
+   d:"The empty area between and around elements. Also called negative space.",
+   h:"Central to the Japanese concept of ma, the interval that gives an arrangement meaning — in Noh theatre, the pause is the performance. It reached Western design through the Bauhaus (1919 to 1933) and Swiss modernism, both of which treated emptiness as active composition. Luxury print advertising made the commercial version explicit: the more space around an object, the more expensive it appears.",
+   p:"Macro white space signals premium. This is directly usable for a fashion brand — space is cheaper than photography and moves perceived value more.",
+   s:"Tripling the space around the product raises perceived value more than any change to the colour would.",
+   k:["Japanese ma negative space","white space luxury branding","macro vs micro whitespace"]},
+  {n:"Proximity",
+   d:"The Gestalt principle that elements placed close together are read as related.",
+   h:"One of Wertheimer's original 1923 laws. It is the strongest grouping force available — it beats similarity, and it beats explicit borders. Robin Williams popularised it for non-designers in The Non-Designer's Design Book (1994) as one of four core principles, which is how it entered general workplace vocabulary.",
+   p:"The label belongs to the input it is nearest. If the gap above a label equals the gap below it, the form is ambiguous.",
+   s:"The label is equidistant between two fields, so it reads as belonging to neither. Tighten it to its own input.",
+   k:["law of proximity examples","form label spacing rules","Non-Designer's Design Book CRAP"]},
+  {n:"Density",
+   d:"How much information occupies a given area.",
+   h:"Edward Tufte argued in The Visual Display of Quantitative Information (1983) for maximising data-ink and dismissed low-density layouts as wasteful. The counter-position came from consumer software, where low density reduces cognitive load for occasional users. Both are right for different audiences, which is why serious design systems now ship density modes — compact, default and comfortable.",
+   p:"Density is an audience decision, not a taste decision. A trader wants dense. A first-time shopper does not.",
+   s:"This is an expert tool used daily. Comfortable density is costing them three scrolls per task.",
+   k:["Tufte data ink ratio","UI density modes design system","information density interface"]},
+  {n:"Padding and margin",
+   d:"Padding is space inside an element's boundary. Margin is space outside it.",
+   h:"The distinction was codified by the CSS box model in CSS1 (1996). The long-running box-sizing conflict — whether padding counts inside the declared width — was one of the defining browser incompatibilities of the 1990s and is why almost every stylesheet now opens by setting border-box.",
+   p:"Padding belongs to the component. Margin belongs to the layout. Components that carry their own outer margin break reuse.",
+   s:"Strip the margin off the card. Spacing between cards is the parent's job, not the card's.",
+   k:["CSS box model padding margin","box-sizing border-box history","component should not own margin"]},
+  {n:"Rhythm",
+   d:"The repeating pattern of spacing and sizing that gives a layout a consistent pulse.",
+   h:"Directly borrowed from music and from classical architecture, where the spacing of columns produced measurable rhythm. In typography it means consistent vertical spacing; in interfaces it means a limited spacing scale used everywhere. Randomly chosen gaps are the most reliable sign of an untrained layout.",
+   p:"A rhythm you can name — 4, 8, 12, 16, 24, 32, 48 — is worth more than a rhythm you tune per screen.",
+   s:"There are eleven different vertical gaps in this file. The scale has seven steps. Four of these are accidents.",
+   k:["vertical rhythm design","spacing scale design system","modular spacing steps"]}
+  ]
+},
+{
+  block:"Fundamentals", day:4, title:"Hierarchy",
+  connect:"Hierarchy is the promise that the screen will tell you what matters first. Everything on Day 1 and Day 3 exists to make this possible.",
+  exercise:"Screenshot a screen. Blur it heavily. What still stands out is your real hierarchy — not the one you intended.",
+  terms:[
+  {n:"Visual hierarchy",
+   d:"The deliberate ordering of elements so the eye reads them in a chosen sequence.",
+   h:"Rooted in Renaissance page composition, then formalised by the Swiss International Typographic Style of the 1950s, which stripped out decoration and left only scale, weight, position and space as the tools of emphasis. That reduction is why Swiss-trained hierarchy still translates directly to screens, while ornamental traditions do not.",
+   p:"Built from five levers: size, weight, colour, spacing and position. Use the fewest that work.",
+   s:"There are three competing primary elements here. Only one thing can be first — which is it?",
+   k:["visual hierarchy principles","Swiss International Typographic Style","hierarchy without color"]},
+  {n:"Focal point",
+   d:"The single element intended to be seen first.",
+   h:"A term from painting and photography composition, where the focal point is where the eye lands before it begins to scan. Advertising research in the mid twentieth century turned it into a measurable thing, and modern eye-tracking studies — notably Nielsen Norman Group's — confirmed that most screens have one dominant landing point whether or not the designer chose it.",
+   p:"If you have not chosen the focal point, the busiest element has chosen it for you.",
+   s:"The focal point should be the product. Right now it is the discount badge.",
+   k:["focal point composition","eye tracking landing point web","dominant element layout"]},
+  {n:"Scale",
+   d:"The relative size of elements to one another.",
+   h:"Classical architecture derived scale from ratios of the human body. Typographic scale came from the fixed sizes available in metal type, which is why the numbers 8, 10, 12, 14, 18, 24, 36, 48 persist. Digital removed the physical constraint, and the result was hundreds of arbitrary sizes per project — which is exactly why design systems reintroduced fixed scales voluntarily.",
+   p:"Scale jumps must be decisive. A 16 next to an 18 reads as a mistake; a 16 next to a 24 reads as intent.",
+   s:"These two sizes are close enough to look like an error. Either match them or separate them properly.",
+   k:["typographic scale ratios","modular scale design","type size steps system"]},
+  {n:"Contrast",
+   d:"Measurable difference between two elements, in any property.",
+   h:"The word carries two meanings that get confused. Compositional contrast — big against small, heavy against light — comes from art theory. Contrast ratio is a specific luminance measurement formalised in WCAG 2.0 (2008) with a 4.5 to 1 threshold for body text. Saying a design needs more contrast without saying which one you mean is a common source of review confusion.",
+   p:"Contrast can be created in size, weight, colour, space or direction. Colour is the one people overuse.",
+   s:"I mean compositional contrast, not contrast ratio — the ratio passes, but everything is the same weight.",
+   k:["contrast in design principles","WCAG contrast ratio 4.5","contrast without color accessibility"]},
+  {n:"Emphasis",
+   d:"The techniques used to make one element stand out from its peers.",
+   h:"Typographic emphasis has a long inherited toolkit: italics from Renaissance chancery hands, bold from nineteenth century advertising, underline from typewriters that could not do either. The web repurposed underline exclusively for links, which is why underlining for emphasis now reads as a broken link rather than as stress.",
+   p:"One emphasis technique per level. Bold plus colour plus size on the same word is shouting.",
+   s:"Pick one — bold or the accent colour. Doing both makes the next emphasis level impossible to define.",
+   k:["typographic emphasis history","bold italic underline usage rules","emphasis hierarchy levels"]}
+  ]
+},
+{
+  block:"Fundamentals", day:5, title:"Movement",
+  connect:"Hierarchy decides what is first. Movement decides the path between first and last. These five describe how the eye travels.",
+  exercise:"Draw the path your eye takes across three screens you use daily. Compare it to what the designer probably intended.",
+  terms:[
+  {n:"Alignment",
+   d:"The positioning of elements along a shared edge or axis.",
+   h:"Left alignment for Latin scripts came from the mechanics of the typewriter and, before that, from scribal practice. Justified text — flush on both edges — was the default for centuries of book printing because hand-set type could be spaced word by word; it survives poorly on the web, where the browser cannot hyphenate as well as a typesetter could.",
+   p:"Every element should align with at least one other. Centre alignment is a decision, not a resting state.",
+   s:"Three different left edges in one column. Pick one axis and hold everything to it.",
+   k:["alignment principle design","justified text web problems","optical vs edge alignment"]},
+  {n:"Continuity",
+   d:"The Gestalt principle that the eye follows the smoothest available path.",
+   h:"Another of Wertheimer's original laws, sometimes called good continuation. It explains why a line of items reads as a single group even when the items differ, and why breaking an alignment mid-list feels like a stumble. Carousels, timelines and progress indicators all rely on it.",
+   p:"An interrupted line breaks a group. That can be useful — a deliberate break is a section divider without a divider.",
+   s:"That indent breaks continuity halfway down the list, so it reads as two lists.",
+   k:["law of continuity Gestalt","good continuation perception","visual flow line design"]},
+  {n:"Eye flow",
+   d:"The actual sequence in which a viewer scans a composition.",
+   h:"Studied seriously from the 1950s in advertising research using early eye-tracking rigs, then revived for the web by Nielsen Norman Group from the late 1990s. The important finding was consistent across both eras: people do not read screens, they scan them, and the scan path is far more predictable than the reading path.",
+   p:"Eye flow is measurable, not theoretical. If you cannot test it, blur the screen and check what survives.",
+   s:"Eye flow currently goes image, price, badge, then title. The title is fourth on a page whose job is naming the product.",
+   k:["eye tracking web scanning","Nielsen Norman scan patterns","visual flow analysis design"]},
+  {n:"F-pattern",
+   d:"The scanning shape people fall into on text-heavy pages: two horizontal sweeps, then a vertical run down the left.",
+   h:"Identified by Jakob Nielsen's eye-tracking study in 2006 across 232 users. It is not a rule for how to design — it is a description of what happens when a page gives the eye nothing better to do. Nielsen's own conclusion was that the F-pattern is a symptom of weak formatting, not a target to design for.",
+   p:"If your page produces a clean F, your content is probably under-structured.",
+   s:"We are getting F-pattern scanning because there is no subheading structure to interrupt it.",
+   k:["Nielsen F-pattern eye tracking 2006","F shaped reading pattern web","scanning patterns content design"]},
+  {n:"Z-pattern",
+   d:"The scanning shape on sparse pages: across the top, diagonally down, then across the bottom.",
+   h:"Popularised in advertising layout theory well before the web, based on the assumption of left-to-right reading cultures. Its main honest use is landing pages with little content, where the designer controls all four corners. It does not hold for dense pages, and it inverts entirely for right-to-left scripts like Arabic and Hebrew.",
+   p:"Useful for a single-purpose landing page. Not useful for a product listing.",
+   s:"Z-pattern puts the call to action bottom right, which is where it is now — but that only holds if we keep the page this sparse.",
+   k:["Z pattern layout landing page","reading gravity advertising","RTL layout mirroring"]}
+  ]
+},
+{
+  block:"Fundamentals", day:6, title:"Review one", review:true,
+  connect:"No new terms. Test yourself on Days 1 to 5 before the vocabulary starts stacking.",
+  exercise:"Cover the definitions. For each of the 25 terms, say the definition out loud, then say one sentence using it about a real screen. Anything you cannot do both for goes back on tomorrow's list.",
+  reviewOf:[1,2,3,4,5],
+  terms:[]
+},
+{
+  block:"Fundamentals", day:7, title:"Composition",
+  connect:"Days 1 to 5 gave you the parts. These five are the words for how the parts sit together as one thing.",
+  exercise:"Take a layout you like. Identify whether its balance is symmetrical or asymmetrical, and find the one element breaking repetition. Ask whether the break is intentional.",
+  terms:[
+  {n:"Balance",
+   d:"The distribution of visual weight across a composition.",
+   h:"Rudolf Arnheim's 1954 analysis treated a composition as a physical field where every element exerts pull, and balance as the resolution of those forces. The idea is older — classical architecture and Renaissance painting both worked to explicit balance rules — but Arnheim gave it a perceptual rather than a decorative justification.",
+   p:"Balance is not centring. A heavy element on one side can be balanced by empty space on the other.",
+   s:"The layout is left-heavy. Rather than centring it, give the right side more space and let the imbalance be deliberate.",
+   k:["visual balance types design","Arnheim perceptual forces","asymmetrical balance layout"]},
+  {n:"Symmetry and asymmetry",
+   d:"Mirrored arrangement versus deliberately unmirrored arrangement.",
+   h:"Symmetry dominated Western design until the early twentieth century, when the New Typography movement — Jan Tschichold's 1928 manifesto Die Neue Typographie — attacked centred symmetry as decorative and dishonest, arguing for asymmetric layouts driven by content and function. Tschichold later recanted and returned to classical symmetry, which remains one of the most interesting reversals in design history.",
+   p:"Symmetry reads as formal and static. Asymmetry reads as modern and active. Neither is better.",
+   s:"Centred symmetry here is fighting the brand. The rest of the system is asymmetric.",
+   k:["Jan Tschichold New Typography","symmetry vs asymmetry layout","Tschichold recantation classical"]},
+  {n:"Repetition",
+   d:"Reusing visual elements consistently across a design.",
+   h:"One of Robin Williams's four principles from 1994, alongside contrast, alignment and proximity. Repetition is the ancestor of the design system — a component library is repetition made explicit and enforceable. Before systems, repetition was maintained by discipline and a style guide PDF that nobody opened.",
+   p:"Repetition is what makes a design feel like one product rather than several.",
+   s:"This screen invents a new card style. The repetition break is not saying anything, so it should match.",
+   k:["repetition design principle","CRAP design principles Williams","consistency vs repetition UI"]},
+  {n:"Unity",
+   d:"The sense that all parts of a design belong to the same whole.",
+   h:"A Gestalt-derived idea and a core term in the Bauhaus curriculum, where Johannes Itten's preliminary course trained students to see a composition as a single system rather than assembled parts. In interfaces, unity is largely delivered by shared tokens — the same radii, the same shadows, the same spacing scale.",
+   p:"Unity is boring to achieve and instantly visible when missing.",
+   s:"Four border radii across one screen. Unity is broken and the page feels assembled rather than designed.",
+   k:["unity principle of design","Bauhaus preliminary course Itten","design token consistency"]},
+  {n:"Variety",
+   d:"Deliberate difference introduced to prevent monotony.",
+   h:"The classical counterweight to unity, articulated in Renaissance art theory as varietas — Alberti argued in 1435 that a composition needs difference to hold attention. In interfaces the tension is live and constant: design systems push toward total uniformity, while long pages need variation to stay readable.",
+   p:"Variety should come from content and rhythm, not from inventing new component styles.",
+   s:"We can break the monotony by changing the section rhythm rather than by introducing a second card style.",
+   k:["unity and variety art principles","Alberti varietas composition","visual monotony long pages"]}
+  ]
+},
+{
+  block:"Fundamentals", day:8, title:"Movements, part one",
+  connect:"Every layout decision you make was argued about by someone in the twentieth century. Knowing whose argument you are repeating makes you faster in a review.",
+  exercise:"For each movement, find one contemporary product that is still clearly working inside it. Name the specific evidence.",
+  terms:[
+  {n:"Bauhaus",
+   d:"The German school (1919 to 1933) that merged craft, art and industrial production.",
+   h:"Founded by Walter Gropius in Weimar, moved to Dessau, then Berlin, then closed under Nazi pressure in 1933. Its faculty — Klee, Kandinsky, Albers, Moholy-Nagy — scattered internationally and carried the method worldwide, notably to Chicago and to Black Mountain College. The core claim was that form should follow function and that design was a discipline teachable through systematic principles rather than taste.",
+   p:"The reason your design education is structured around principles at all is largely Bauhaus.",
+   s:"The whole grid-and-token approach is a Bauhaus inheritance — systematic, teachable, reproducible.",
+   k:["Bauhaus school history 1919","Gropius form follows function","Bauhaus influence on UI design"]},
+  {n:"Swiss style",
+   d:"The postwar movement built on grids, sans-serif type, asymmetry and photographic imagery.",
+   h:"Also called the International Typographic Style. Emerged in Zurich and Basel in the 1950s through Muller-Brockmann, Emil Ruder and Armin Hofmann. It supplied the objective grid, flush-left ragged-right setting, and Helvetica (1957). Its claim to universality is also its main critique — the neutrality it prized is a cultural position, not an absence of one.",
+   p:"Nearly every design system in production is a Swiss-style descendant.",
+   s:"We are working in a Swiss lineage here, which is why neutrality is the default and ornament has to justify itself.",
+   k:["International Typographic Style","Muller-Brockmann Swiss design","Helvetica 1957 history"]},
+  {n:"Modernism",
+   d:"The broad twentieth century movement favouring function, abstraction and rejection of ornament.",
+   h:"Adolf Loos's 1908 essay Ornament and Crime set the tone, arguing ornament was cultural regression. Modernism carried through architecture, product design and graphics for most of the century, producing both the discipline we rely on and the sterility that later movements reacted against.",
+   p:"Minimalism in product design is usually late modernism with better tooling.",
+   s:"The instinct to strip this back is a modernist reflex. Worth checking whether it is right here or just habitual.",
+   k:["Adolf Loos Ornament and Crime","modernism design principles","less is more Mies"]},
+  {n:"Postmodern design",
+   d:"The reaction against modernist neutrality, using ornament, historical reference and irony.",
+   h:"Robert Venturi answered Mies van der Rohe's less is more with less is a bore in 1966. In graphics it ran through the Memphis Group (Milan, 1981), David Carson's deliberately unreadable Ray Gun spreads in the 1990s, and Wolfgang Weingart's New Wave typography. It reintroduced the idea that legibility is one value among several rather than the only one.",
+   p:"The current wave of expressive, maximalist brand sites is a postmodern turn with better rendering.",
+   s:"Breaking the grid here is a postmodern move. Fine — but it has to be the loudest thing on the page or it reads as an error.",
+   k:["Memphis Group Milan 1981","David Carson Ray Gun typography","postmodern graphic design Weingart"]},
+  {n:"Web brutalism",
+   d:"A deliberately raw web aesthetic using default styling, harsh contrast and visible structure.",
+   h:"Named after brutalist architecture, from beton brut meaning raw concrete, which exposed structural material rather than cladding it. The web version emerged around 2014 to 2016 as a reaction against templated startup design, catalogued by the site brutalistwebsites.com. Its useful legacy is honesty about structure; its failure mode is inaccessibility treated as attitude.",
+   p:"Legitimate for portfolios and cultural work. Almost never appropriate for commerce.",
+   s:"Brutalist styling would suit the brand voice but it would cost us conversion on the checkout path.",
+   k:["brutalist web design history","beton brut architecture origin","anti-design aesthetic web"]}
+  ]
+},
+{
+  block:"Fundamentals", day:9, title:"Movements, part two",
+  connect:"The last five were about layout ideology. These five are about surface — and every one of them is still argued about in product reviews today.",
+  exercise:"Find one interface currently mixing two of these styles. Decide whether the mix is intentional or accumulated.",
+  terms:[
+  {n:"Skeuomorphism",
+   d:"Design that imitates real-world materials, objects and physics.",
+   h:"The word comes from Greek skeuos, meaning vessel, and morphe, meaning shape. Archaeologists used it for pottery that imitated metalwork. Digitally it peaked with Apple's iOS 6 — leather stitching in Calendar, green felt in Game Center, a linen texture behind everything — and was cut abruptly by iOS 7 in 2013 under Jony Ive. It is returning selectively in spatial and augmented interfaces, where physical metaphor regains actual meaning.",
+   p:"Skeuomorphism earns its cost when it teaches. It does not earn it as texture.",
+   s:"This is skeuomorphic without the payoff — the material adds weight but no comprehension.",
+   k:["skeuomorphism iOS 6 examples","skeuomorphic design origin archaeology","spatial computing physical metaphor"]},
+  {n:"Flat design",
+   d:"A style removing depth cues — no gradients, shadows or textures.",
+   h:"Microsoft's Metro language for Windows Phone (2010) came first; iOS 7 (2013) made it universal. The immediate cost was well documented: removing every depth cue also removed the signifiers that told people what was tappable, and clickability research at Nielsen Norman Group tracked the resulting usability regression through the mid 2010s.",
+   p:"Flat design is not free. Every shadow you remove is a signifier you owe back somewhere else.",
+   s:"Going fully flat here means the primary action loses its last depth cue. It needs weight or colour to compensate.",
+   k:["Microsoft Metro design language","iOS 7 flat design shift","flat design clickability problem NNG"]},
+  {n:"Material Design",
+   d:"Google's design language built on the metaphor of layered, physical paper.",
+   h:"Launched in 2014 as a middle position between skeuomorphism and flat: no textures, but real elevation, shadow and motion physics. It introduced the 8dp grid, elevation levels and the floating action button to a mass audience. Material 3, released in 2021, added dynamic colour generated from a user's wallpaper — an unusual move toward user-controlled theming.",
+   p:"Even if you never build in Material, its elevation model and 8dp grid are in almost every system you touch.",
+   s:"The elevation model here is Material-derived, so the shadow tokens should map to their levels rather than being invented.",
+   k:["Material Design 2014 launch","Material 3 dynamic color","elevation shadow levels system"]},
+  {n:"Neumorphism",
+   d:"A style using soft dual shadows to make elements appear extruded from the background.",
+   h:"Named in a Dribbble-driven wave around 2019 to 2020, from new plus skeuomorphism. It was critiqued almost immediately on accessibility grounds — because the effect depends on very low contrast between element and background, it structurally cannot pass WCAG contrast requirements for interactive components. It remains a useful case study in an aesthetic that trended and died on measurable grounds.",
+   p:"Worth knowing mostly as the clearest example of a style that fails an objective test.",
+   s:"Neumorphic controls cannot pass 3 to 1 for non-text contrast. The look is structurally inaccessible.",
+   k:["neumorphism accessibility problems","soft UI trend 2020","WCAG non-text contrast 3:1"]},
+  {n:"Glassmorphism",
+   d:"Layered translucent surfaces with background blur.",
+   h:"Apple used frosted translucency from iOS 7 and macOS Yosemite (2014), then made it central again with visionOS (2023) and the Liquid Glass direction announced in 2025. Unlike neumorphism it can be made accessible, because the blurred layer can carry a solid tint underneath to guarantee contrast. It also carries a real rendering cost on low-end devices.",
+   p:"Blur is expensive to render. Always specify the solid fallback.",
+   s:"Keep the glass, but there is a solid tint at 85 percent underneath so the text contrast holds on any background.",
+   k:["glassmorphism accessibility contrast","visionOS material design","backdrop-filter performance cost"]}
+  ]
+},
+{
+  block:"Fundamentals", day:10, title:"Laws, part one",
+  connect:"These are the five most cited laws in product reviews. Knowing the study behind each one is the difference between quoting a law and using it.",
+  exercise:"Take one screen and find a concrete violation of each of these five. Write the fix as one sentence.",
+  terms:[
+  {n:"Fitts's Law",
+   d:"The time to hit a target is a function of its distance and its size.",
+   h:"Paul Fitts published it in 1954, based on human motor-system research conducted for aviation — he was studying pilot error, not interfaces. Its most famous interface consequence is the Mac menu bar sitting flush against the top screen edge, which makes it infinitely tall in practice because the cursor cannot overshoot it.",
+   p:"Screen edges and corners are the fastest targets available. Mobile thumb zones invert which edges are cheap.",
+   s:"The primary action is 32 pixels tall and sits in the worst thumb zone. That is a Fitts problem, not a taste problem.",
+   k:["Fitts's Law 1954 original","Fitts law UI target size","thumb zone mobile reachability"]},
+  {n:"Hick's Law",
+   d:"Decision time increases logarithmically with the number of choices.",
+   h:"From work by William Hick and Ray Hyman in 1951 and 1952. Its popular design application is usually oversimplified — the law describes simple choices among equally likely options, not complex evaluations. A menu of 30 restaurant dishes does not obey it cleanly, because people categorise rather than scan linearly.",
+   p:"Grouping beats deleting. Categorising ten items reduces decision time more reliably than cutting to five.",
+   s:"Rather than removing filters, group them. Hick's applies to the flat list, not to the categorised one.",
+   k:["Hick's Law original study 1952","Hick Hyman law limitations","choice overload paradox"]},
+  {n:"Jakob's Law",
+   d:"People spend most of their time on other products, so they expect yours to work the same way.",
+   h:"Stated by Jakob Nielsen and consistent with his long-running argument against novelty in interaction patterns. It is the strongest argument available against inventing new conventions, and the most common thing a designer forgets when defending an original interaction in a portfolio review.",
+   p:"Convention is a budget. Spend it on the one interaction that is genuinely your product's value.",
+   s:"Jakob's Law says the cart icon goes top right. If we move it we need a real reason, not a compositional one.",
+   k:["Jakob's Law UX","Nielsen convention over invention","mental models existing products"]},
+  {n:"Miller's Law",
+   d:"The average person holds about seven items, plus or minus two, in working memory.",
+   h:"From George Miller's 1956 paper, one of the most cited and most misapplied papers in psychology. Miller was writing about immediate memory span for unrelated items, not about navigation menus. Later work put the practical figure closer to four. Miller himself described the number as a persecution, given how widely it was misused.",
+   p:"It does not mean menus need seven items. It means unstructured lists get forgotten.",
+   s:"Miller does not apply here — the list is scannable on screen, so nothing is being held in memory.",
+   k:["Miller 1956 magical number seven","working memory capacity four","Miller's law misapplied UX"]},
+  {n:"Tesler's Law",
+   d:"Every system has an irreducible amount of complexity. The only question is who absorbs it.",
+   h:"Also called the law of conservation of complexity, formulated by Larry Tesler at Xerox PARC in the mid 1980s. Tesler also spent his career fighting interface modes — his licence plate read NO MODES. His argument was that engineering should take on complexity so the user does not, and that the tradeoff is never eliminated, only moved.",
+   p:"Simplifying a screen usually means moving work to engineering, to defaults, or to a later step. Name where it went.",
+   s:"We can remove that step, but the complexity moves to the confirmation screen. That is a fair trade, not a deletion.",
+   k:["Tesler law conservation of complexity","Larry Tesler no modes","complexity tradeoff interface"]}
+  ]
+},
+{
+  block:"Fundamentals", day:11, title:"Review two", review:true,
+  connect:"No new terms. Days 7 to 10 covered composition, two waves of movements, and the first five laws.",
+  exercise:"Pick any product and write a 150 word critique using at least eight terms from Days 7 to 10 correctly. If a term feels forced, you do not own it yet.",
+  reviewOf:[7,8,9,10],
+  terms:[]
+},
+{
+  block:"Fundamentals", day:12, title:"Laws, part two",
+  connect:"The first five laws were about capability. These five are about memory and emotion — how people remember an experience after it ends.",
+  exercise:"Map the emotional peaks and the ending of one flow you own. Ask which one you have actually designed.",
+  terms:[
+  {n:"Von Restorff effect",
+   d:"The item that differs from its neighbours is the one remembered.",
+   h:"Named for Hedwig von Restorff, who published the finding in 1933. Also called the isolation effect. It is the mechanism behind the single primary button in a group of secondaries, and the reason that making everything prominent makes nothing prominent.",
+   p:"Distinctiveness is relative. Three highlighted items are three unhighlighted items.",
+   s:"Von Restorff only works with one. Making both plans stand out means neither does.",
+   k:["Von Restorff isolation effect 1933","distinctiveness memory design","primary secondary button hierarchy"]},
+  {n:"Serial position effect",
+   d:"People best remember the first and last items in a sequence.",
+   h:"Hermann Ebbinghaus established primacy and recency in the 1880s through experiments on himself using nonsense syllables — some of the earliest quantitative memory research. It applies to navigation order, onboarding steps, pricing tables and anything else presented as a list.",
+   p:"Put the most important navigation item first or last. The middle is where things go to be forgotten.",
+   s:"The item we care most about is fourth of six. Serial position says move it to either end.",
+   k:["Ebbinghaus serial position curve","primacy recency effect UX","navigation order memory"]},
+  {n:"Zeigarnik effect",
+   d:"Unfinished tasks are remembered better than completed ones.",
+   h:"Bluma Zeigarnik, a Soviet psychologist, published it in 1927 after observing that waiters recalled unpaid orders in detail and forgot them immediately after payment. It underlies progress bars, completion percentages and the LinkedIn profile strength meter — all devices that create a mild, useful discomfort.",
+   p:"It is genuinely useful for onboarding completion, and genuinely manipulative when the task serves you rather than the user.",
+   s:"A progress indicator would lift completion here, and the task is in the user's interest, so it is honest to use.",
+   k:["Zeigarnik effect 1927 waiters","completion progress motivation UX","goal gradient effect"]},
+  {n:"Peak-end rule",
+   d:"People judge an experience by its most intense moment and its ending, not its average.",
+   h:"From Daniel Kahneman and Barbara Fredrickson's work in the 1990s, including a study where patients rated a longer procedure with a gentler ending as less unpleasant than a shorter one with a harsh ending. It reframes the design question from make everything good to make the peak and the ending good.",
+   p:"For e-commerce, the ending is order confirmation and unboxing — the two moments most teams under-invest in.",
+   s:"The average of this flow is fine. The ending is a plain success message, and that is what they will remember.",
+   k:["Kahneman peak end rule study","experiencing vs remembering self","order confirmation experience design"]},
+  {n:"Doherty threshold",
+   d:"Productivity rises sharply when system response is under about 400 milliseconds.",
+   h:"Walter Doherty and Ahrvind Thadani published the finding at IBM in 1982, arguing that faster response did not just save time but changed how people worked — they stayed in flow rather than context-switching. It is why perceived performance work, like optimistic updates and skeleton screens, pays for itself.",
+   p:"Under 400 milliseconds, respond instantly. Over one second, show progress. Over ten, let them leave and come back.",
+   s:"The save takes 900 milliseconds. Optimistic update puts it under the Doherty threshold without touching the backend.",
+   k:["Doherty threshold IBM 1982","perceived performance optimistic UI","response time limits Nielsen"]}
+  ]
+},
+{
+  block:"Fundamentals", day:13, title:"Proportion and craft",
+  connect:"The details that separate work that is correct from work that looks right. Most of these are cases where the measurement and the perception disagree.",
+  exercise:"Find one icon in a button in your own work. Measure whether it is mathematically centred. Then decide whether it looks centred.",
+  terms:[
+  {n:"Golden ratio",
+   d:"The proportion of approximately 1 to 1.618.",
+   h:"Known to Euclid, named the divine proportion by Luca Pacioli in 1509, and attached retroactively to the Parthenon and to Renaissance painting by nineteenth century writers — most of those attributions do not survive scrutiny. Its status in design is largely mythological, though it remains a perfectly usable ratio among many.",
+   p:"Use it if you like the result. Do not cite it as proof that a layout is correct.",
+   s:"The ratio works, but not because it is golden. It works because the jump is decisive.",
+   k:["golden ratio design myth debunked","Luca Pacioli divine proportion","Parthenon golden ratio false"]},
+  {n:"Rule of thirds",
+   d:"Dividing a frame into nine parts and placing key elements on the lines or intersections.",
+   h:"First described by the painter John Thomas Smith in 1797 in Remarks on Rural Scenery. It became a photographic convention and then a camera viewfinder overlay. In interfaces it is most useful for hero imagery and cropping product photography rather than for layout structure.",
+   p:"Directly relevant to e-commerce photography. It is the crop rule, not the layout rule.",
+   s:"Crop the hero to put the garment on the left third. The current centred crop kills the composition.",
+   k:["rule of thirds origin 1797","photography composition cropping","hero image crop e-commerce"]},
+  {n:"Optical alignment",
+   d:"Adjusting position by eye rather than by measurement, so it looks aligned.",
+   h:"A skill from metal typesetting, where letters like O and A visually recede at the same measured position and had to be pushed out. It survives in punctuation hanging outside a text block, in play icons nudged right inside circular buttons, and in triangular shapes shifted off mathematical centre.",
+   p:"Circles and triangles almost always need optical correction. Squares almost never do.",
+   s:"The play icon is centred mathematically, which is why it looks left. Push it two pixels right.",
+   k:["optical alignment vs mathematical","hanging punctuation typography","icon optical centering"]},
+  {n:"Optical sizing",
+   d:"Adjusting a typeface's design, not just its scale, for the size it is set at.",
+   h:"Metal type was cut separately for each size — small sizes got thicker strokes and looser spacing to survive printing. Phototypesetting and early digital type destroyed this by scaling one master to all sizes. Variable fonts restored it in 2016 with the optical size axis, returning a capability lost for roughly fifty years.",
+   p:"If your typeface has an optical size axis, use it. Display text set from a body master looks weak.",
+   s:"Set the display at optical size 48 rather than scaling the body master. The strokes are too heavy at that size otherwise.",
+   k:["optical size axis variable fonts","metal type size specific cuts","opsz font feature"]},
+  {n:"Aspect ratio",
+   d:"The proportional relationship between width and height.",
+   h:"Standardised repeatedly by whichever technology dominated: 4 to 3 from early film and CRT, 16 to 9 from HDTV negotiation in the 1980s, 1 to 1 from Instagram in 2010, 9 to 16 from vertical video. Each shift forced a rework of how images are cropped and stored.",
+   p:"Lock aspect ratios in the component, not in the asset. Content teams will upload whatever they have.",
+   s:"The card enforces 4 to 5 with object-fit cover, so an inconsistent upload cannot break the grid.",
+   k:["aspect ratio standards history","object-fit cover CSS","image ratio design system"]}
+  ]
+},
+{
+  block:"Fundamentals", day:14, title:"Process",
+  connect:"Vocabulary for the work around the artwork. These are the words you use with people who are not designers, which makes precision matter more.",
+  exercise:"Write a one-paragraph design brief for something you are working on. Objective, audience, constraint, success measure. Four sentences.",
+  terms:[
+  {n:"Design brief",
+   d:"A short document defining the problem, audience, constraints and success measures.",
+   h:"Formalised in advertising agency practice in the mid twentieth century, where the account planner's brief was the contract between client intent and creative work. Product design absorbed it later and often loosely — the frequency of projects starting without a written brief is why so much design work is relitigated at review.",
+   p:"A brief you cannot write in four sentences is a project that has not been agreed yet.",
+   s:"Before we explore, I want a brief. Right now three of us have three different success measures.",
+   k:["design brief template product","advertising account planning brief","problem framing design"]},
+  {n:"Moodboard",
+   d:"A curated collection of references establishing visual direction.",
+   h:"Physical moodboards were standard in fashion and interior design long before digital, built from fabric swatches, tear sheets and photographs. Their digital descendants — Pinterest from 2010, Are.na, Figma boards — made collection frictionless, which weakened the discipline. The value was always in the editing, not the gathering.",
+   p:"Twelve considered references beat sixty. Annotate why each one is there.",
+   s:"Cut this to ten and write one line under each on what specifically we are taking from it.",
+   k:["moodboard vs style tile","art direction reference curation","Are.na visual research"]},
+  {n:"Wireframe",
+   d:"A low-fidelity layout showing structure and hierarchy without visual design.",
+   h:"The term came from 3D modelling, where a wireframe mesh shows geometry without surfaces. Web design adopted it in the late 1990s to separate structural decisions from visual ones so clients would stop reviewing colour when the question was navigation. Modern tooling has blurred the boundary, and low-fidelity is now a discipline rather than a limitation.",
+   p:"The purpose of low fidelity is to make the conversation about structure. If people discuss colour, the fidelity is too high.",
+   s:"Keeping this greyscale on purpose — I want the review to be about the flow, not the palette.",
+   k:["wireframe fidelity levels","lo-fi vs hi-fi prototyping","when to use wireframes"]},
+  {n:"Prototype",
+   d:"An interactive model built to test a specific question.",
+   h:"Prototyping as method came from industrial design and engineering, where a physical model was the cheapest way to fail early. IDEO's popularisation of design thinking in the 1990s and 2000s pushed it into software. The key discipline is that a prototype tests one hypothesis — a prototype built to demonstrate rather than to test is a pitch.",
+   p:"Ask what would falsify this before you build it. If nothing could, you are making a demo.",
+   s:"This prototype tests one thing: whether people find the size guide before adding to cart. Nothing else needs to work.",
+   k:["prototype fidelity purpose","IDEO design thinking prototyping","testable hypothesis prototype"]},
+  {n:"Design critique",
+   d:"A structured session for evaluating work against its stated intent.",
+   h:"The format comes from art school crit, where work was pinned up and defended publicly. Software teams adapted it, and the important adaptation was separating critique from approval — a crit generates observations against the brief, while a review makes a decision. Conflating the two is why so many critiques become a search for consensus.",
+   p:"A critique opens with the designer stating the goal and the specific feedback they want. Without that it becomes taste.",
+   s:"This is a crit, not an approval. I need feedback on the checkout hierarchy, and nothing else today.",
+   k:["design critique format facilitation","art school crit origins","critique vs feedback vs approval"]}
+  ]
+},
+{
+  block:"Fundamentals", day:15, title:"Systems",
+  connect:"The vocabulary that connects design to engineering. Getting these five precisely right immediately changes how developers respond to you.",
+  exercise:"Look at any component you have built. Name its tokens, its variants and its states out loud, in that order.",
+  terms:[
+  {n:"Design system",
+   d:"The complete set of components, tokens, patterns and documented rules for building a product.",
+   h:"Salesforce Lightning (2015) and Google's Material (2014) established the modern shape. What separated them from earlier style guides was enforceability — code and design shared the same source of truth. Brad Frost's Atomic Design (2013) supplied the vocabulary for composition, from atoms up to templates.",
+   p:"A component library is not a design system. The system is the library plus the rules plus the governance.",
+   s:"We have a library, not a system. Nothing documents when to use a sheet instead of a modal.",
+   k:["design system vs component library","Salesforce Lightning 2015","Atomic Design Brad Frost"]},
+  {n:"Style guide",
+   d:"Documentation of visual standards — colour, type, logo, spacing, tone.",
+   h:"Descended from print brand manuals, some of which are design artefacts in their own right — the NASA Graphics Standards Manual of 1975 and Massimo Vignelli's 1970 New York subway manual are both still in print. These were static PDFs, and their limitation was that nothing enforced them.",
+   p:"A style guide describes. A design system enforces. Do not use the words interchangeably in a room with engineers.",
+   s:"That is a style guide question, not a system question — the rule exists, it just is not encoded anywhere.",
+   k:["NASA graphics standards manual 1975","Vignelli NYC subway manual","brand guidelines vs design system"]},
+  {n:"Pattern library",
+   d:"A collection of reusable solutions to recurring interaction problems.",
+   h:"The concept traces to Christopher Alexander's A Pattern Language (1977), about architecture and towns, which also directly inspired software design patterns in the 1990s. In interfaces a pattern is larger than a component — search-and-filter or empty-state recovery are patterns, while a button is a component.",
+   p:"Components answer what to build. Patterns answer how to combine them for a recurring problem.",
+   s:"This is a pattern gap, not a component gap. We have every piece and no agreed way to assemble them.",
+   k:["Christopher Alexander pattern language","UI pattern vs component","interaction design patterns library"]},
+  {n:"Design token",
+   d:"A named, platform-agnostic variable holding a design decision.",
+   h:"Named by the Salesforce team around 2014 while building Lightning across web, iOS and Android from one source. The mature structure is three layers: primitive (blue-600), semantic (action-primary) and component (button-background-primary). The W3C Design Tokens Community Group has been working toward a shared format since 2019.",
+   p:"Semantic naming is what makes theming and dark mode possible. Primitive-only naming guarantees a rewrite later.",
+   s:"We cannot ship dark mode until these are semantic. Everything is bound straight to a primitive right now.",
+   k:["design tokens three tier naming","Salesforce design tokens origin","W3C design tokens format spec"]},
+  {n:"Component",
+   d:"A reusable interface element with defined properties, variants and states.",
+   h:"The idea moved from software engineering into design tools rather than the other way around. Sketch symbols (2014) and Figma components (2016) let designers work the way developers already did. Atomic Design gave the mental model, and the convergence of design components and code components is still incomplete.",
+   p:"A component is defined by its states as much as its appearance. A design missing disabled, loading, error and empty is unfinished.",
+   s:"The component is not done. There is no loading state and no error state, so engineering will invent both.",
+   k:["component variants properties states","Figma components 2016","design to code component parity"]}
+  ]
+},
+{
+  block:"Fundamentals", day:16, title:"Practice",
+  connect:"The last five are about how design behaves over time — under constraint, under revision, and under the obligation to work for everyone.",
+  exercise:"Name one piece of design debt you have personally created. Estimate what it costs now versus what fixing it costs.",
+  terms:[
+  {n:"Iteration",
+   d:"Repeated cycles of making, testing and refining.",
+   h:"The method came from engineering and manufacturing, notably Toyota's production system and the plan-do-check-act cycle. Software adopted it through agile in the early 2000s. The distortion worth naming is that iteration in practice often means shipping small changes forever, without the testing step that made it a method rather than a habit.",
+   p:"Iteration without a measurement is just revision.",
+   s:"We have iterated four times and measured none of them. The next version needs a number attached.",
+   k:["iterative design process","PDCA cycle Toyota","iteration vs revision design"]},
+  {n:"Constraint",
+   d:"A limitation on the solution space — technical, business, legal or self-imposed.",
+   h:"Design theory has treated constraint as generative rather than restrictive since at least the Bauhaus. Charles Eames put it plainly in a 1972 interview: design depends largely on constraints, and he welcomed them. Dieter Rams's ten principles are themselves a set of voluntary constraints.",
+   p:"Ask for constraints early. A brief with none produces work that cannot be evaluated.",
+   s:"What is the hard constraint here? If there is genuinely none, we will invent one, because unlimited scope gives us nothing to push against.",
+   k:["Charles Eames constraints quote 1972","constraints in design process","Dieter Rams ten principles"]},
+  {n:"Design debt",
+   d:"Accumulated inconsistency and shortcuts that raise the cost of future design work.",
+   h:"Borrowed directly from Ward Cunningham's technical debt metaphor, coined in 1992. The design version compounds the same way — every one-off component, every unmapped colour, every undocumented pattern raises the cost of the next decision. Its distinguishing feature is that it is invisible in any single screenshot.",
+   p:"Design debt is best argued in engineering terms: hours to build the next feature, not aesthetic inconsistency.",
+   s:"Framing this as design debt: eleven button variants means every new screen starts with a twenty minute decision.",
+   k:["design debt vs technical debt","Ward Cunningham debt metaphor 1992","UI inconsistency audit"]},
+  {n:"Accessibility",
+   d:"Designing so that people with disabilities can use a product.",
+   h:"The Web Content Accessibility Guidelines came from the W3C, with version 1.0 in 1999, 2.0 in 2008, and 2.1 in 2018 adding mobile and low-vision criteria. Legally it is enforced through the Americans with Disabilities Act, Section 508, and the European Accessibility Act, which took effect for many products in June 2025. WCAG is organised around four principles: perceivable, operable, understandable and robust.",
+   p:"Roughly 16 percent of the world's population lives with a significant disability. This is not an edge case.",
+   s:"This fails 1.4.3 on contrast and 2.4.7 on focus visibility. Both are AA and both are cheap to fix now.",
+   k:["WCAG 2.1 AA criteria list","POUR principles accessibility","European Accessibility Act 2025"]},
+  {n:"Inclusive design",
+   d:"Designing for the full range of human diversity, treating exclusion as the problem to solve.",
+   h:"Microsoft's Inclusive Design toolkit (2016) supplied the influential framing of permanent, temporary and situational disability — someone with one arm, someone with a broken arm, and someone holding a baby all need one-handed use. It reframes accessibility from a compliance minimum to a design method, and argues that solving for one extends to many.",
+   p:"Accessibility is the floor and it is measurable. Inclusive design is the method and it is not.",
+   s:"One-handed reach is not only an accessibility case — most of our mobile sessions are one-handed anyway.",
+   k:["Microsoft inclusive design toolkit","permanent temporary situational disability","solve for one extend to many"]}
+  ]
+},
+{
+  block:"Fundamentals", day:17, title:"Review three", review:true,
+  connect:"Final review of the Fundamentals block. Days 12 to 16 covered the memory laws, craft details, process, systems and practice.",
+  exercise:"Write a full critique of one screen using terms from across all seventeen days. Aim for 300 words. This is the artefact that proves the block is done.",
+  reviewOf:[12,13,14,15,16],
+  terms:[]
+}
+];
+
+/* Blocks still to be written — shown as the roadmap */
+const STUBS = [
+ {block:"UI", from:18, to:41, note:"24 days. Around 100 terms covering component anatomy, states, navigation patterns, feedback, forms and platform conventions.",
+  themes:["Controls and inputs","States and feedback","Navigation patterns","Overlays and layers","Lists and tables","Forms and validation","Loading and empty","Icons and imagery","Mobile conventions","Desktop conventions","Responsive behaviour","Micro-interactions"]},
+ {block:"UX", from:42, to:65, note:"24 days. Research methods, behavioural models, information architecture, metrics and ethics.",
+  themes:["Research methods","Behavioural models","Jobs and mental models","Information architecture","Journey mapping","Usability heuristics","Metrics and measurement","Testing and validation","Onboarding and activation","Retention and habit","Conversion and funnels","Ethics and deceptive patterns"]},
+ {block:"Color", from:66, to:75, note:"10 days. Around 40 terms across models, perception, systems and accessibility.",
+  themes:["Color models","Perception and harmony","Semantic systems","Contrast and accessibility","Theming and dark mode"]},
+ {block:"Typography", from:76, to:87, note:"12 days. Around 50 terms across anatomy, setting, pairing and web performance.",
+  themes:["Letterform anatomy","Classification","Setting and spacing","Scale and hierarchy","Pairing","Web fonts and performance"]},
+ {block:"Components", from:88, to:107, note:"20 days. Not vocabulary — one full component specification per day, built into your own library.",
+  themes:["Buttons and actions","Inputs and selection","Navigation","Overlays","Feedback","Data display","Layout primitives"]},
+ {block:"Communication", from:108, to:127, note:"20 days. Frames and scripts for describing, defending and critiquing design work.",
+  themes:["Describing a decision","Naming trade-offs","Giving critique","Receiving critique","Defending under pressure","Writing rationale","Presenting to stakeholders"]}
+];
+
+/* ════════════════════════════════════════════════════════════
+   APP
+   ════════════════════════════════════════════════════════════ */
+
+/* ── storage (falls back to memory if blocked) ── */
+/* ═══ BAKED PROGRESS ═══
+   Written by the "Save to file" button in Settings.
+   Do not hand-edit unless you know what you are doing. */
+const BAKED = {"studied":[],"finished":[],"time":{},"stamp":null};
+/* ═══ END BAKED PROGRESS ═══ */
+
+/* ── storage ── */
+const store = (()=>{
+  let mem={}, ok=true;
+  try{ localStorage.setItem("__t","1"); localStorage.removeItem("__t"); }catch(e){ ok=false; }
+  return {
+    get:k=>{ try{ return ok?localStorage.getItem(k):(mem[k]??null); }catch(e){ return mem[k]??null; } },
+    set:(k,v)=>{ try{ ok?localStorage.setItem(k,v):(mem[k]=v); }catch(e){ mem[k]=v; } }
+  };
+})();
+
+const K="designvocab.v3";
+const dateKey=()=>new Date().toISOString().slice(0,10);
+const blank={studied:[],finished:[],time:{},opts:{lock:true,timer:true,auto:true,hist:true,open:false,goal:20}};
+let DB=Object.assign({},blank,JSON.parse(store.get(K)||"{}"));
+DB.opts=Object.assign({},blank.opts,DB.opts||{});
+let studied=new Set(DB.studied), finished=new Set(DB.finished);
+const save=()=>{DB.studied=[...studied];DB.finished=[...finished];store.set(K,JSON.stringify(DB));};
+
+/* fold in whatever was baked into the file */
+(function(){
+  if(!BAKED.stamp) return;
+  const localStamp = DB.stamp || 0;
+  const fileStamp  = BAKED.stamp || 0;
+  const fresh = fileStamp > localStamp;
+  BAKED.studied.forEach(n=>studied.add(n));
+  BAKED.finished.forEach(d=>finished.add(d));
+  Object.entries(BAKED.time||{}).forEach(([k,v])=>{
+    DB.time[k] = Math.max(DB.time[k]||0, v);
+  });
+  if(fresh) DB.stamp = fileStamp;
+  save();
+})();
+
+/* migrate older saves */
+try{
+  const v2=JSON.parse(store.get("designvocab.v2")||"null");
+  if(v2 && !studied.size && !finished.size){
+    (v2.studied||[]).forEach(n=>studied.add(n));
+    (v2.finished||[]).forEach(d=>finished.add(d));
+    DB.time=Object.assign({},v2.time||{},DB.time); save();
+  }
+  const v1=JSON.parse(store.get("designvocab.v1")||"[]");
+  if(v1.length && !studied.size){ v1.forEach(n=>studied.add(n)); save(); }
+}catch(e){}
+
+const allTerms=DAYS.flatMap(d=>d.terms.map(t=>({...t,day:d.day,block:d.block})));
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const currentDay=()=>{ const d=DAYS.find(x=>!finished.has(x.day)); return d?d.day:DAYS[DAYS.length-1].day; };
+const isLocked=day=>DB.opts.lock && day>currentDay();
+const dayReady=d=>d.review || d.terms.every(t=>studied.has(t.n));
+
+let view={ day:currentDay(), q:"", stub:null };
+
+/* ── clock ── */
+let secs=DB.time[dateKey()]||0;
+let paused=false;
+setInterval(()=>{
+  if(!DB.opts.timer||paused) return;
+  if(DB.opts.auto && document.hidden) return;
+  secs++; DB.time[dateKey()]=secs;
+  if(secs%10===0) save();
+  paintClock();
+},1000);
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+function paintClock(){
+  const el=$("#clock"); if(!el) return;
+  const goal=DB.opts.goal||20, hit=secs>=goal*60;
+  el.classList.toggle("rest",hit);
+  el.classList.toggle("paused",paused);
+  el.querySelector(".clock-n").textContent=fmt(secs);
+  el.querySelector("small").textContent=hit?"goal reached":"of "+goal+" min today";
+  el.querySelector("#pause").textContent=paused?"Resume":"Pause";
+}
+function streak(){ let n=0,d=new Date(); for(;;){ const k=d.toISOString().slice(0,10); if((DB.time[k]||0)>=60){n++;d.setDate(d.getDate()-1);}else break; } return n; }
+
+/* ── strip ── */
+function renderStrip(){
+  $("#strip").innerHTML=DAYS.map(d=>{
+    const lock=isLocked(d.day), fin=finished.has(d.day), now=d.day===currentDay();
+    return `<button data-goday="${d.day}" ${lock?"disabled":""}
+      class="${fin?"fin ":""}${now?"now ":""}${d.review?"rev ":""}"
+      aria-current="${!view.q && !view.stub && view.day===d.day}"
+      title="Day ${d.day} — ${esc(d.title)}${lock?" (locked)":""}">${d.day}</button>`;
+  }).join("") + STUBS.map(s=>`<button data-stub="${esc(s.block)}" title="${esc(s.block)} — not written yet" style="width:auto;padding:0 10px">${esc(s.block)}</button>`).join("");
+}
+
+/* ── views ── */
+function render(){
+  renderStrip();
+  if(view.q) renderSearch();
+  else if(view.stub) renderStub();
+  else renderDay();
+  updateProgress();
+  paintClock();
+}
+
+function renderDay(){
+  const d=DAYS.find(x=>x.day===view.day)||DAYS[0];
+  if(isLocked(d.day)){
+    $("#view").innerHTML=`<div class="locked-msg">Day ${d.day} opens once day ${currentDay()} is finished.</div>`;
+    return;
+  }
+  const fin=finished.has(d.day), ready=dayReady(d), total=d.terms.length;
+  const doneN=d.terms.filter(t=>studied.has(t.n)).length;
+
+  $("#view").innerHTML=`
+  <div class="panel">
+    <div class="panel-top">
+      <div>
+        <div class="panel-k">Day ${d.day} of ${DAYS.length} · ${esc(d.block)}${d.review?" · review":""}${fin?" · finished":""}</div>
+        <h2 class="panel-t">${esc(d.title)}</h2>
+      </div>
+      <div class="clock" id="clock">
+        <div class="clock-n">0:00</div><small></small>
+        <button class="btn" id="pause">Pause</button>
+      </div>
+    </div>
+    ${total?`<div class="dots">${d.terms.map(t=>`<i class="${studied.has(t.n)?"on":""}"></i>`).join("")}</div>`:""}
+    <div class="panel-foot">
+      <span class="panel-count">${total?`${doneN} of ${total} ticked · `:""}${allTerms.length-studied.size} terms left overall</span>
+      <span>
+        ${d.day>1?`<button class="btn" data-goday="${d.day-1}">Previous</button> `:""}
+        ${fin
+          ? (d.day<DAYS.length && !isLocked(d.day+1) ? `<button class="btn primary" data-goday="${d.day+1}">Next day</button>` : "")
+          : `<button class="btn primary" id="finish" ${ready?"":"disabled"}>${ready?"Finish day "+d.day:"Tick all "+total+" to finish"}</button>`}
+      </span>
+    </div>
+  </div>
+  <p class="connect">${esc(d.connect)}</p>
+  ${d.review?reviewBlock(d):d.terms.map(t=>termRow(t)).join("")}
+  <div class="exercise"><b>${d.review?"Review task":"Today's exercise"}</b>${esc(d.exercise)}</div>`;
+
+  if(DB.opts.open) document.querySelectorAll(".term").forEach(t=>t.classList.add("open"));
+}
+
+function renderSearch(){
+  const q=view.q.toLowerCase();
+  const hits=allTerms.filter(t=>!isLocked(t.day) &&
+    (t.n+" "+t.d+" "+t.h+" "+t.p+" "+t.s+" "+t.k.join(" ")).toLowerCase().includes(q));
+  $("#view").innerHTML = hits.length
+    ? `<p class="resultof">${hits.length} match${hits.length===1?"":"es"} across days you have unlocked</p>`
+      + hits.map(t=>termRow(t,true)).join("")
+    : `<div class="empty">Nothing matches that. Locked days are not searched.</div>`;
+  if(DB.opts.open) document.querySelectorAll(".term").forEach(t=>t.classList.add("open"));
+}
+
+function renderStub(){
+  const s=STUBS.find(x=>x.block===view.stub);
+  $("#view").innerHTML=`<div class="panel"><div class="panel-top"><div>
+    <div class="panel-k">Days ${s.from} to ${s.to} · not written yet</div>
+    <h2 class="panel-t">${esc(s.block)}</h2></div></div>
+    <div class="panel-count">${esc(s.note)}</div></div>
+    <ul class="themelist">${s.themes.map((t,i)=>`<li><span>${i+1}</span>${esc(t)}</li>`).join("")}</ul>`;
+}
+
+function termRow(t,showDay){
+  const on=studied.has(t.n);
+  return `<article class="term${on?" done":""}" data-term="${esc(t.n)}">
+    <div class="term-head">
+      <input class="tick" type="checkbox" ${on?"checked":""} aria-label="Mark ${esc(t.n)} as studied">
+      <button class="term-btn" aria-expanded="false">
+        <span class="term-name">${esc(t.n)}</span>
+        <span class="term-def">${showDay?`Day ${t.day} · `:""}${esc(t.d)}</span></button>
+      <span class="chev">&#9654;</span>
+    </div>
+    <div class="term-body">
+      ${DB.opts.hist?`<div class="field"><div class="field-k">Where it comes from</div><p class="history">${esc(t.h)}</p></div>`:""}
+      <div class="field"><div class="field-k">In practice</div><p>${esc(t.p)}</p></div>
+      <div class="field"><div class="field-k">Say it in a review</div><p class="sayit">${esc(t.s)}</p></div>
+      <div class="field"><div class="field-k">Search these to go deeper</div>
+        <ul class="keys">${t.k.map(k=>`<li><button data-k="${esc(k)}">${esc(k)}</button></li>`).join("")}</ul></div>
+    </div></article>`;
+}
+
+function reviewBlock(d){
+  const list=DAYS.filter(x=>d.reviewOf.includes(x.day));
+  return `<div class="review"><p>Cover the definitions and work through these ${list.reduce((a,x)=>a+x.terms.length,0)} terms.</p>
+  <ol>${list.map(x=>`<li>Day ${x.day} — ${esc(x.title)}: ${x.terms.map(t=>esc(t.n)).join(", ")}</li>`).join("")}</ol></div>`;
+}
+
+function updateProgress(){
+  const total=allTerms.length, c=allTerms.filter(t=>studied.has(t.n)).length;
+  $("#bar-all").style.width=(c/total*100)+"%";
+  $("#prog-all").textContent=`${c} of ${total} terms · day ${currentDay()} of ${DAYS.length}`;
+  const st=streak();
+  $("#prog-sub").textContent=`${total-c} terms left · ${st} day streak`;
+  const cd=DAYS.find(x=>x.day===currentDay());
+  $("#jump").textContent=`Open today · day ${cd.day}, ${cd.title}`;
+  document.querySelectorAll("#blocks .cnt[data-b]").forEach(el=>{
+    const b=el.dataset.b, list=allTerms.filter(t=>t.block===b);
+    el.textContent=list.length?`${list.filter(t=>studied.has(t.n)).length}/${list.length}`:"—";
+  });
+  $("#blocknow").textContent = view.stub || "Fundamentals";
+  document.querySelectorAll("#blocks button").forEach(b=>{
+    const isFund=b.dataset.block==="Fundamentals";
+    b.setAttribute("aria-current", view.stub ? b.dataset.block===view.stub : isFund);
+  });
+}
+
+function buildNav(){
+  const blocks=["Fundamentals",...STUBS.map(s=>s.block)];
+  $("#blocks").innerHTML=blocks.map(b=>
+    `<li><button data-block="${esc(b)}">${esc(b)}<span class="cnt" data-b="${esc(b)}"></span></button></li>`).join("");
+  ["lock","timer","auto","hist","open"].forEach(o=>{ $("#opt-"+o).checked=DB.opts[o]; });
+  $("#opt-goal").value=DB.opts.goal;
+}
+
+/* ── events ── */
+document.addEventListener("click",e=>{
+  const tb=e.target.closest(".term-btn");
+  if(tb){ const t=tb.closest(".term"); t.classList.toggle("open"); tb.setAttribute("aria-expanded",t.classList.contains("open")); return; }
+
+  const kb=e.target.closest(".keys button");
+  if(kb){ window.open("https://www.google.com/search?q="+encodeURIComponent(kb.dataset.k),"_blank","noopener"); return; }
+
+  const go=e.target.closest("[data-goday]");
+  if(go){ const day=+go.dataset.goday; if(isLocked(day))return;
+    view={day:day,q:"",stub:null}; $("#q").value=""; $("#note").classList.remove("on");
+    render(); scrollTo({top:0,behavior:"smooth"}); return; }
+
+  const st=e.target.closest("[data-stub]");
+  if(st){ view={day:view.day,q:"",stub:st.dataset.stub}; $("#q").value=""; $("#note").classList.remove("on"); render(); scrollTo({top:0}); return; }
+
+  const bb=e.target.closest("[data-block]");
+  if(bb){ const b=bb.dataset.block;
+    view = b==="Fundamentals" ? {day:currentDay(),q:"",stub:null} : {day:view.day,q:"",stub:b};
+    $("#q").value=""; $("#note").classList.remove("on");
+    const g=$(".blockgroup"); g.classList.remove("open"); $("#blocktoggle").setAttribute("aria-expanded",false);
+    render(); scrollTo({top:0}); return; }
+
+  if(e.target.id==="pause"){ paused=!paused; paintClock(); return; }
+
+  if(e.target.id==="finish"){
+    const d=currentDay(); finished.add(d); save();
+    view={day:Math.min(d+1,DAYS[DAYS.length-1].day),q:"",stub:null};
+    render(); scrollTo({top:0,behavior:"smooth"}); return;
+  }
+});
+
+document.addEventListener("change",e=>{
+  if(e.target.classList.contains("tick")){
+    const art=e.target.closest(".term"), name=art.dataset.term;
+    e.target.checked?studied.add(name):studied.delete(name);
+    art.classList.toggle("done",e.target.checked);
+    save();
+    if(!view.q&&!view.stub){
+      const d=DAYS.find(x=>x.day===view.day);
+      const dots=$(".dots");
+      if(dots) dots.innerHTML=d.terms.map(t=>`<i class="${studied.has(t.n)?"on":""}"></i>`).join("");
+      const cnt=$(".panel-count");
+      if(cnt) cnt.textContent=`${d.terms.filter(t=>studied.has(t.n)).length} of ${d.terms.length} ticked · ${allTerms.length-studied.size} terms left overall`;
+      const fb=$("#finish");
+      if(fb){ const r=dayReady(d); fb.disabled=!r; fb.textContent=r?"Finish day "+d.day:"Tick all "+d.terms.length+" to finish"; }
+    }
+    updateProgress();
+    return;
+  }
+  const id=e.target.id;
+  if(id&&id.startsWith("opt-")){
+    const key=id.slice(4);
+    DB.opts[key]= key==="goal" ? Math.max(5,Math.min(120,+e.target.value||20)) : e.target.checked;
+    save(); render();
+  }
+});
+
+$("#q").addEventListener("input",e=>{
+  view.q=e.target.value.trim(); view.stub=null;
+  const n=$("#note");
+  if(view.q){ n.classList.add("on"); n.textContent="Searching unlocked days only"; } else n.classList.remove("on");
+  render();
+});
+$("#jump").addEventListener("click",()=>{
+  view={day:currentDay(),q:"",stub:null}; $("#q").value=""; $("#note").classList.remove("on");
+  render(); scrollTo({top:0,behavior:"smooth"});
+});
+const gear=$("#scrim");
+const openGear=v=>{ gear.hidden=!v; if(v){ paintBake(); $("#opt-lock").focus(); } };
+$("#blocktoggle").addEventListener("click",e=>{
+  const g=e.currentTarget.closest(".blockgroup");
+  const open=!g.classList.contains("open");
+  g.classList.toggle("open",open);
+  e.currentTarget.setAttribute("aria-expanded",open);
+});
+$("#barbtn").addEventListener("click",e=>{
+  if(matchMedia("(min-width:921px)").matches) return;
+  const b=e.currentTarget;
+  b.setAttribute("aria-expanded", b.getAttribute("aria-expanded")!=="true");
+});
+$("#opengear").addEventListener("click",()=>openGear(true));
+$("#closegear").addEventListener("click",()=>openGear(false));
+gear.addEventListener("click",e=>{ if(e.target===gear) openGear(false); });
+
+function paintBake(){
+  const el=$("#bakeinfo"); if(!el) return;
+  el.textContent = BAKED.stamp
+    ? "This file carries progress saved on "+new Date(BAKED.stamp).toLocaleDateString()+"."
+    : "This file carries no saved progress yet.";
+}
+$("#bake").addEventListener("click", async ()=>{
+  const btn=$("#bake"); btn.disabled=true; btn.textContent="Building the file…";
+  try{
+    const res=await fetch(location.href,{cache:"reload"});
+    let html=await res.text();
+    const snap=JSON.stringify({studied:[...studied],finished:[...finished],time:DB.time,stamp:Date.now()});
+    const re=/const BAKED = \{[\s\S]*?\};/;
+    if(!re.test(html)) throw new Error("marker not found");
+    html=html.replace(re,"const BAKED = "+snap+";");
+    const url=URL.createObjectURL(new Blob([html],{type:"text/html"}));
+    const a=document.createElement("a");
+    a.href=url; a.download="index.html"; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),2000);
+    btn.textContent="Downloaded. Upload it to GitHub.";
+  }catch(err){
+    btn.textContent="Could not read the page file";
+    console.error(err);
+  }
+  setTimeout(()=>{ btn.disabled=false; btn.textContent="Save progress into a new index.html"; },3500);
+});
+
+$("#reset").addEventListener("click",()=>{
+  if(!confirm("Clear all progress, including finished days and time?")) return;
+  studied=new Set(); finished=new Set(); DB.time={}; secs=0; paused=false;
+  view={day:1,q:"",stub:null}; save(); render(); openGear(false);
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="/"&&document.activeElement.tagName!=="INPUT"){ e.preventDefault(); $("#q").focus(); }
+  if(e.key==="Escape"&&!gear.hidden){ openGear(false); return; }
+  if(e.key==="Escape"&&document.activeElement===$("#q")){ $("#q").value=""; view.q=""; $("#note").classList.remove("on"); render(); $("#q").blur(); }
+  if(document.activeElement.tagName==="INPUT") return;
+  if(!view.q&&!view.stub){
+    if(e.key==="ArrowRight"){ const n=view.day+1; if(n<=DAYS.length&&!isLocked(n)){ view.day=n; render(); } }
+    if(e.key==="ArrowLeft"){ const n=view.day-1; if(n>=1){ view.day=n; render(); } }
+  }
+});
+addEventListener("beforeunload",save);
+
+buildNav();
+render();
+paintBake();
+</script>
+</body>
+</html>
